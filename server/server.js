@@ -1,12 +1,19 @@
+require("dotenv").config();
+
 const express = require("express");
 const cors = require("cors");
 const app = express();
 
-const PORT = 5000;
+const messageRoutes = require("./routes/messageRoutes");
+const connectDB = require("./config/db");
+
+
+const PORT = process.env.PORT || 5000;
+
+connectDB();
 
 app.use(cors());
 
-const messageRoutes = require("./routes/messageRoutes");
 
 app.use(express.json());
 app.use("/api",messageRoutes);
